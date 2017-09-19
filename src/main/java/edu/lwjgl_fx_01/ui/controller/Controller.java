@@ -28,7 +28,7 @@ import jfxtras.labs.scene.control.window.WindowIcon;
 public class Controller extends AnchorPane
 {
 	@FXML
-	Pane mainPane;	
+	AnchorPane mainAnchorPane;	
 	
 	private MainFx App;
 	
@@ -40,7 +40,7 @@ public class Controller extends AnchorPane
 		fxmlLoader.setRoot(this);
 		fxmlLoader.setController(this);
 
-		//getStyleClass().add("block-blue");
+		getStyleClass().add("main-window");
 
 		try {
 			fxmlLoader.load();
@@ -54,9 +54,9 @@ public class Controller extends AnchorPane
 	@FXML
     private void initialize() {
 		NavigationWindow navWindow = new NavigationWindow();
-		mainPane.getChildren().add(navWindow);
+		mainAnchorPane.getChildren().add(navWindow);
 		MainWindow mainWindow = new MainWindow();
-		mainPane.getChildren().add(mainWindow);
+		mainAnchorPane.getChildren().add(mainWindow);
 	
 	}
 
@@ -125,7 +125,7 @@ public class Controller extends AnchorPane
 		*/
 		w.getContentPane().getChildren().add(new Label("Hello world!"));
 		w.getContentPane().getChildren().add(w);
-		mainPane.getChildren().add(w);
+		mainAnchorPane.getChildren().add(w);
 		
 		//Stage stg = (Stage) w.getScene().getWindow();
 		
