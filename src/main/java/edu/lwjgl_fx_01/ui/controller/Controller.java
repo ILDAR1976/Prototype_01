@@ -1,5 +1,6 @@
-package edu.lwjgl_fx_01.ui.view;
+package edu.lwjgl_fx_01.ui.controller;
 
+import java.io.IOException;
 import java.util.concurrent.CountDownLatch;
 
 import org.apache.logging.log4j.Level;
@@ -7,12 +8,14 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import edu.lwjgl_fx_01.basic.om.MainFx;
+import edu.lwjgl_fx_01.ui.view.MainWindow;
 import edu.lwjgl_fx_01.ui.view.NavigationWindow;
 import javafx.event.EventHandler;
 import javafx.event.ActionEvent;
 import javafx.util.Duration;
 import javafx.animation.ScaleTransition;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
 import javafx.scene.layout.*;
 import jfxtras.labs.scene.control.window.CloseIcon;
@@ -22,7 +25,7 @@ import jfxtras.labs.scene.control.window.Window;
 import jfxtras.labs.scene.control.window.WindowIcon;
 
 @SuppressWarnings({ "unused", "restriction" })
-public class Controller 
+public class Controller extends AnchorPane
 {
 	@FXML
 	Pane mainPane;	
@@ -31,7 +34,22 @@ public class Controller
 	
 	final static Logger logger = LogManager.getLogger(Controller.class);
 	
-	public Controller(){}
+	public Controller(){
+		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource("edu/lwjgl_fx_01/ui/view/Main.fxml"));
+
+		fxmlLoader.setRoot(this);
+		fxmlLoader.setController(this);
+
+		//getStyleClass().add("block-blue");
+
+		try {
+			fxmlLoader.load();
+		} catch (IOException exception) {
+			throw new RuntimeException(exception);
+		}
+		
+		
+	}
 	
 	@FXML
     private void initialize() {

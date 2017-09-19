@@ -8,6 +8,8 @@ import org.apache.logging.log4j.Logger;
 import edu.lwjgl_fx_01.ui.model.Model;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Group;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.TextArea;
@@ -15,7 +17,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
-import edu.lwjgl_fx_01.ui.view.Controller;
+import edu.lwjgl_fx_01.ui.controller.Controller;
 
 @SuppressWarnings({ "restriction", "unused" })
 public class MainFx extends Application
@@ -40,27 +42,19 @@ public class MainFx extends Application
 	public void start(Stage primaryStage) throws Exception {
 	    this.primaryStage = primaryStage;
 	    this.primaryStage.setTitle("Hello world application");
-	
-	    try {
-	        FXMLLoader loader = new FXMLLoader();
-	        
-	        loader.setLocation(getClass().getClassLoader().getResource("edu/lwjgl_fx_01/ui/view/Main.fxml"));
 
-	        Parent mainView = loader.load();
-	
-	        Controller controller = loader.getController();
-	        
-	        controller.setApp(this);
-	        
-	        Scene scene = new Scene(mainView);
-	        
-	        this.primaryStage.setScene(scene);
-            
-	        this.primaryStage.show();
-	    
-	    } catch (IOException e) {
-	        e.printStackTrace();
-	    }
+    	Group root = new Group();
+
+        Controller controller = new Controller();
+        
+        root.getChildren().addAll(controller);
+
+        Scene scene = new Scene(root);
+        
+        this.primaryStage.setScene(scene);
+        
+        this.primaryStage.show();
+    
 	}
 
 
